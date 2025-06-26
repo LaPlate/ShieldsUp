@@ -4,11 +4,9 @@ using System.Runtime.CompilerServices;
 
 public partial class Main : Node2D
 {
-    public void main()
+    public override void _Process(double delta)
     {
-        while (true)
-        {
-            GD.Print("What is happening");
-        }
+        GD.Print("What is happening");
     }
+
 }
