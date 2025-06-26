@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgxfnkdxidyuh"]
+[gd_scene load_steps=5 format=3 uid="uid://cgxfnkdxidyuh"]
 
 [ext_resource type="Script" uid="uid://cddqykhen5qh" path="res://Scripts/Main.cs" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://rampd3v2h5io" path="res://Scenes/card.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://dn7s4ihwfjaxf" path="res://Scenes/torpedo.tscn" id="3_jjvhh"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="QuadMesh" id="QuadMesh_8gbba"]
+
+[node name="Main" type="Node3D" node_paths=PackedStringArray("CardSpawnPoint", "TorpedoLaunchPoint", "TorpedoImpactPoint")]
 script = ExtResource("1_jjgbg")
+CardPreFab = ExtResource("2_8gbba")
+TorpedoPreFab = ExtResource("3_jjvhh")
+CardSpawnPoint = NodePath("")
+TorpedoLaunchPoint = NodePath("")
+TorpedoImpactPoint = NodePath("")
+
+[node name="PlayerViewCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.947807, 0.318844, 0, -0.318844, 0.947807, 0.00427538, 0.198882, 0.726228)
+current = true
+fov = 40.0
+
+[node name="BoardIlluminationLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341506, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.00386941, 0)
+mesh = SubResource("QuadMesh_8gbba")
