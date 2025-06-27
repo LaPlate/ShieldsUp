@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlg0v6o7wp277"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u5s86"]
+size = Vector3(1.8, 0.02, 1.25)
+
+[node name="DemoShip" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="MatBase" type="CSGBox3D" parent="RigidBody3D"]
+size = Vector3(1.8, 0.02, 1.25)
+
+[node name="BridgeIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00557617, -0.420895)
+operation = 2
+size = Vector3(0.818, 0.00884766, 0.338)
+
+[node name="SensorsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.663021, 0.00557617, -0.425258)
+operation = 2
+size = Vector3(0.341142, 0.00884766, 0.327406)
+
+[node name="WeaponsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.645375, 0.00657327, -0.329444)
+operation = 2
+size = Vector3(0.341142, 0.00884766, 0.520026)
+
+[node name="EngineeringIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.645375, 0.00657327, 0.295651)
+operation = 2
+size = Vector3(0.341142, 0.00884766, 0.586063)
+
+[node name="ShieldsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236893, 0.00657327, -0.0270551)
+operation = 2
+size = Vector3(0.341142, 0.00884766, 0.297487)
+
+[node name="CargoIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211107, 0.00657327, 0.381936)
+operation = 2
+size = Vector3(1.23714, 0.00884766, 0.401795)
+
+[node name="SickBayIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235182, 0.00657327, -0.0270551)
+operation = 2
+size = Vector3(0.341958, 0.00884766, 0.297487)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_u5s86")
