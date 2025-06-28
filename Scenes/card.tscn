@@ -1,22 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://rampd3v2h5io"]
+[gd_scene load_steps=5 format=3 uid="uid://rampd3v2h5io"]
 
-[ext_resource type="Texture2D" uid="uid://8fbu3orpy7cx" path="res://Assets/Skins/Card_001.png" id="1_0qqmn"]
+[ext_resource type="Script" uid="uid://c7hhn6qgfcivi" path="res://Scripts/Card.cs" id="1_wf8id"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gmcdd"]
 size = Vector3(0.075, 0.05, 0.001)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wf8id"]
-albedo_texture = ExtResource("1_0qqmn")
-normal_enabled = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_gmcdd"]
+[sub_resource type="BoxMesh" id="BoxMesh_0qqmn"]
 
 [sub_resource type="Skin" id="Skin_brehn"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eumee"]
-albedo_texture = ExtResource("1_0qqmn")
-
 [node name="Card" type="Node3D"]
+script = ExtResource("1_wf8id")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -25,10 +19,8 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_gmcdd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="CardMesh3D" type="MeshInstance3D" parent="RigidBody3D"]
 transform = Transform3D(0.05, 0, 0, 0, 0.075, 0, 0, 0, 0.001, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_wf8id")
-mesh = SubResource("BoxMesh_gmcdd")
+mesh = SubResource("BoxMesh_0qqmn")
 skin = SubResource("Skin_brehn")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_eumee")
