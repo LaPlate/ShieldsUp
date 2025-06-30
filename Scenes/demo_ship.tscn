@@ -1,4 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlg0v6o7wp277"]
+[gd_scene load_steps=18 format=3 uid="uid://dlg0v6o7wp277"]
+
+[ext_resource type="Texture2D" uid="uid://bmvbgy6ajoryu" path="res://Assets/Skins/Mat Components/Boxy Demo Spaceship.png" id="1_4sp0c"]
+[ext_resource type="Texture2D" uid="uid://fbx3g1faax41" path="res://Assets/Skins/Mat Components/Bridge Stations.png" id="2_mrw5t"]
+[ext_resource type="Texture2D" uid="uid://cfdqmcvcp1jm3" path="res://Assets/Skins/Mat Components/Sensors Stations.png" id="3_ntech"]
+[ext_resource type="Texture2D" uid="uid://hprinxcmr8p3" path="res://Assets/Skins/Mat Components/Weapons Systems.png" id="4_oxv4i"]
+[ext_resource type="Texture2D" uid="uid://cnignjd5n6ax2" path="res://Assets/Skins/Mat Components/Medical Stations.png" id="5_lhp7q"]
+[ext_resource type="Texture2D" uid="uid://b8qood5jp0w6d" path="res://Assets/Skins/Mat Components/EngineeringPanel.png" id="5_stsji"]
+[ext_resource type="Texture2D" uid="uid://cl1ld4xc0d3hk" path="res://Assets/Skins/Mat Components/ShieldsStations.png" id="6_seiwk"]
+[ext_resource type="Texture2D" uid="uid://bhv3nx4gw75j7" path="res://Assets/Skins/Mat Components/ShuttleBayandCargoPanels.png" id="7_seiwk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mrw5t"]
+albedo_texture = ExtResource("1_4sp0c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntech"]
+albedo_texture = ExtResource("2_mrw5t")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cus3j"]
+albedo_texture = ExtResource("3_ntech")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stsji"]
+albedo_texture = ExtResource("4_oxv4i")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvxii"]
+albedo_texture = ExtResource("5_stsji")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hy0fm"]
+albedo_texture = ExtResource("6_seiwk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vgra"]
+albedo_texture = ExtResource("7_seiwk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_seiwk"]
+albedo_texture = ExtResource("5_lhp7q")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u5s86"]
 size = Vector3(1.8, 0.02, 1.25)
@@ -9,41 +42,77 @@ size = Vector3(1.8, 0.02, 1.25)
 
 [node name="MatBase" type="CSGBox3D" parent="RigidBody3D"]
 size = Vector3(1.8, 0.02, 1.25)
+material = SubResource("StandardMaterial3D_mrw5t")
 
 [node name="BridgeIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00557617, -0.420895)
 operation = 2
 size = Vector3(0.818, 0.00884766, 0.338)
 
+[node name="BridgePanel" type="CSGBox3D" parent="RigidBody3D/MatBase/BridgeIndent"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00142208, -0.00191894, -0.000735432)
+size = Vector3(0.329523, 0.00616211, 0.810156)
+material = SubResource("StandardMaterial3D_ntech")
+
 [node name="SensorsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.663021, 0.00557617, -0.425258)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.663, 0.006, -0.421)
 operation = 2
-size = Vector3(0.341142, 0.00884766, 0.327406)
+size = Vector3(0.341, 0.009, 0.327)
+
+[node name="SensorsPanel" type="CSGBox3D" parent="RigidBody3D/MatBase/SensorsIndent"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000787318, -0.00191894, -0.000735432)
+size = Vector3(0.33, 0.006, 0.35127)
+material = SubResource("StandardMaterial3D_cus3j")
 
 [node name="WeaponsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.645375, 0.00657327, -0.329444)
 operation = 2
 size = Vector3(0.341142, 0.00884766, 0.520026)
 
+[node name="WeaponsPanel" type="CSGBox3D" parent="RigidBody3D/MatBase/WeaponsIndent"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.37038e-05, 0, -0.00231934)
+size = Vector3(0.513428, 0.009, 0.338252)
+material = SubResource("StandardMaterial3D_stsji")
+
 [node name="EngineeringIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.645375, 0.00657327, 0.295651)
 operation = 2
 size = Vector3(0.341142, 0.00884766, 0.586063)
+
+[node name="EngineeringPanel" type="CSGBox3D" parent="RigidBody3D/MatBase/EngineeringIndent"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -7.42078e-05)
+size = Vector3(0.57832, 0.009, 0.33)
+material = SubResource("StandardMaterial3D_pvxii")
 
 [node name="ShieldsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236893, 0.00657327, -0.0270551)
 operation = 2
 size = Vector3(0.341142, 0.00884766, 0.297487)
 
+[node name="ShieldsPanel" type="CSGBox3D" parent="RigidBody3D/MatBase/ShieldsIndent"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.00202817, -0.00191894, -0.000582546)
+size = Vector3(0.33, 0.006, 0.35127)
+material = SubResource("StandardMaterial3D_hy0fm")
+
 [node name="CargoIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211107, 0.00657327, 0.381936)
 operation = 2
 size = Vector3(1.23714, 0.00884766, 0.401795)
 
+[node name="CargoPanel" type="CSGBox3D" parent="RigidBody3D/MatBase/CargoIndent"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.000120968, -0.00189646, 0)
+size = Vector3(0.393904, 0.00616211, 1.23266)
+material = SubResource("StandardMaterial3D_5vgra")
+
 [node name="SickBayIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235182, 0.00657327, -0.0270551)
 operation = 2
 size = Vector3(0.341958, 0.00884766, 0.297487)
+
+[node name="SickBayPanel" type="CSGBox3D" parent="RigidBody3D/MatBase/SickBayIndent"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.00561744, 0)
+size = Vector3(0.33, 0.006, 0.35127)
+material = SubResource("StandardMaterial3D_seiwk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_u5s86")
