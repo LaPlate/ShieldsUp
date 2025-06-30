@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Reflection.Metadata;
 
 public partial class CardFactory : Node
 {
@@ -12,7 +14,9 @@ public partial class CardFactory : Node
     public override void _Ready()
     {
         cardTypeArt["Player"] = GD.Load<StandardMaterial3D>("res://Resources/CardArt/Player_CardArt_Back.tres");
-        GD.Print("Hold here please");
+        cardTypeArt["Threat"] = GD.Load<StandardMaterial3D>("res://Resources/CardArt/Threat_CardArt_Back.tres");
+        cardTypeArt["Event"] = GD.Load<StandardMaterial3D>("res://Resources/CardArt/Event_CardArt_Back.tres");
+        cardTypeArt["Special"] = GD.Load<StandardMaterial3D>("res://Resources/CardArt/Special_CardArt_Back.tres");
 
     }
     public Card CreateCard(CardData data)
@@ -30,6 +34,18 @@ public partial class CardFactory : Node
         {
             case CardData.cardType.Player:
                 cardBackArt = cardTypeArt["Player"];
+                break;
+
+            case CardData.cardType.Threat:
+                cardBackArt = cardTypeArt["Threat"];
+                break;
+
+            case CardData.cardType.Event:
+                cardBackArt = cardTypeArt["Event"];
+                break;
+
+            case CardData.cardType.Special:
+                cardBackArt = cardTypeArt["Special"];
                 break;
 
         }
@@ -111,5 +127,23 @@ public partial class CardFactory : Node
         mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.Triangles, backArrays);
 
         return mesh;
+    }
+    public Card DrawRandomCard(CardData.cardType type)
+    {
+        var filteredCardDB = new CardDatabase();
+        var filteredCards = filteredCardDB.cardList.Values
+            .Where(card => card.CardType == type)
+            .ToList();
+
+        if (filteredCards.Count == 0)
+        {
+            GD.Print("No cards match the type" + type.ToString());
+            return null;
+        }
+
+        var randomInt = GD.RandRange(0.0f, filteredCards.Count);
+        CardData chosenCard = filteredCards[(int)randomInt - 1];
+
+        return CreateCard(chosenCard);
     }
 }

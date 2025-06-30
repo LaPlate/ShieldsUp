@@ -9,18 +9,13 @@ public partial class Main : Node3D
     CardFactory cardFactory;
 
     public Card demoCard = new();
+    Camera3D camera = new();
 
     public override void _Ready()
     {
-        Camera3D camera = GetNode<Camera3D>("Room Elements/PlayerViewCamera");
-        CardData cData = new CardData
-        {
-            CardType = CardData.cardType.Player,
-            CardTitle = "Demo the Hero",
-            CardNum = 1
-        };
 
-        demoCard = cardFactory.CreateCard(cData);
+        camera = GetNode<Camera3D>("Room Elements/PlayerViewCamera");
+        demoCard = cardFactory.DrawRandomCard(CardData.cardType.Player);
         AddChild(demoCard);
         demoCard.GlobalPosition = new Vector3(0.0f, 0.0f, 1.0f);
         demoCard.GetNode<RigidBody3D>("RigidBody3D").Freeze = true;
@@ -30,7 +25,6 @@ public partial class Main : Node3D
 
     public override void _PhysicsProcess(double delta)
     {
-        Camera3D camera = GetNode<Camera3D>("Room Elements/PlayerViewCamera");
         camera.LookAt(demoCard.GlobalPosition);
     }
 
