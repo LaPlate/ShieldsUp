@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://rampd3v2h5io"]
+[gd_scene load_steps=7 format=3 uid="uid://rampd3v2h5io"]
 
 [ext_resource type="Script" uid="uid://c7hhn6qgfcivi" path="res://Scripts/Card.cs" id="1_wf8id"]
 
@@ -9,18 +9,29 @@ size = Vector3(0.075, 0.05, 0.001)
 
 [sub_resource type="Skin" id="Skin_brehn"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qqmn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wf8id"]
+material = SubResource("StandardMaterial3D_0qqmn")
+size = Vector3(0.06, 0.13, 0.001)
+
 [node name="Card" type="Node3D"]
 script = ExtResource("1_wf8id")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="CardBody" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CardCollisionBody" type="CollisionShape3D" parent="CardBody"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_gmcdd")
 
-[node name="CardMesh3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="CardMesh3D" type="MeshInstance3D" parent="CardBody"]
 transform = Transform3D(0.05, 0, 0, 0, 0.075, 0, 0, 0, 0.001, 0, 0, 0)
 mesh = SubResource("BoxMesh_0qqmn")
 skin = SubResource("Skin_brehn")
 skeleton = NodePath("../..")
+
+[node name="HighlightMesh3D" type="MeshInstance3D" parent="CardBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75017e-10, -0.00400392)
+visible = false
+mesh = SubResource("BoxMesh_wf8id")

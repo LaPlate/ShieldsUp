@@ -27,28 +27,29 @@ public partial class CardFactory : Node
         var cardBackArt = new StandardMaterial3D();
 
         completedCard.cardData = data;
-        MeshInstance3D mesh = completedCard.GetNode<MeshInstance3D>("RigidBody3D/CardMesh3D");
+        MeshInstance3D mesh = completedCard.GetNode<MeshInstance3D>("CardBody/CardMesh3D");
+        if (mesh == null) { GD.Print("Not getting loaded in the CreateCard method.");  }
         //This node is a busted BoxNode3D, but we replace it immediately during CreateCard with an ArrayMesh!
 
-        switch (completedCard.cardData.CardType) //Maps the resource references to the matching key in the dictionary 'cardTypeArt' populated during _Ready.
-        {
-            case CardData.cardType.Player:
-                cardBackArt = cardTypeArt["Player"];
-                break;
+            switch (completedCard.cardData.CardType) //Maps the resource references to the matching key in the dictionary 'cardTypeArt' populated during _Ready.
+            {
+                case CardData.cardType.Player:
+                    cardBackArt = cardTypeArt["Player"];
+                    break;
 
-            case CardData.cardType.Threat:
-                cardBackArt = cardTypeArt["Threat"];
-                break;
+                case CardData.cardType.Threat:
+                    cardBackArt = cardTypeArt["Threat"];
+                    break;
 
-            case CardData.cardType.Event:
-                cardBackArt = cardTypeArt["Event"];
-                break;
+                case CardData.cardType.Event:
+                    cardBackArt = cardTypeArt["Event"];
+                    break;
 
-            case CardData.cardType.Special:
-                cardBackArt = cardTypeArt["Special"];
-                break;
+                case CardData.cardType.Special:
+                    cardBackArt = cardTypeArt["Special"];
+                    break;
 
-        }
+            }
 
         //Creates and Confirms the .png to get pasted over the base front art of the new Card.
         string faceArtLink = $"res://Assets/Skins/Cards/{completedCard.cardData.CardType}/Player_Card_{completedCard.cardData.CardNum}.png";
@@ -142,7 +143,10 @@ public partial class CardFactory : Node
         }
 
         var randomInt = GD.RandRange(0.0f, filteredCards.Count);
-        CardData chosenCard = filteredCards[(int)randomInt - 1];
+        GD.Print("Random Pick:" + randomInt.ToString());
+        CardData chosenCard = filteredCards[(int)randomInt];
+        GD.Print("Going with " + ((int)randomInt).ToString() + " out of " + filteredCards.Count.ToString());
+        GD.Print(chosenCard.CardTitle);
 
         return CreateCard(chosenCard);
     }
