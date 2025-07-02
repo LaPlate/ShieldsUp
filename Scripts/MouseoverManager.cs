@@ -24,10 +24,10 @@ public partial class MouseoverManager : Node3D
         if (castResult.TryGetValue("collider", out var colliderVar))
         {
             var colliderNode = colliderVar.As<Node>();
-            GD.Print("Ray hit: ", colliderNode.Name, " (type: ", colliderNode.GetType(), ")");
+            //GD.Print("Ray hit: ", colliderNode.Name, " (type: ", colliderNode.GetType(), ")");
 
             var parent = colliderNode?.GetParent();
-            GD.Print("Parent: " + parent?.Name ?? "null");
+            //GD.Print("Parent: " + parent?.Name ?? "null");
 
             if (parent != null && parent.IsInGroup("Player_Selectable_Cards") && parent is Card card)
             {
@@ -57,6 +57,15 @@ public partial class MouseoverManager : Node3D
                 lastHighlightedCard = null;
             }
 
+        }
+        else if (lastHighlightedCard != null)
+        {
+            GD.Print(">>> HIGHLIGHT ATTEMPT on: ", lastHighlightedCard.Name);
+            GD.Print("    Path: ", lastHighlightedCard.GetPath());
+            GD.Print("    InsideTree: ", lastHighlightedCard.IsInsideTree());
+            GD.Print("    InstanceId: ", lastHighlightedCard.GetInstanceId());
+            lastHighlightedCard.Highlight(false);
+            lastHighlightedCard = null;
         }
 
     }

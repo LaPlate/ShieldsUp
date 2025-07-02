@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgxfnkdxidyuh"]
+[gd_scene load_steps=11 format=3 uid="uid://cgxfnkdxidyuh"]
 
 [ext_resource type="Script" uid="uid://cddqykhen5qh" path="res://Scripts/Main.cs" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://dlg0v6o7wp277" path="res://Scenes/demo_ship.tscn" id="2_8gbba"]
+[ext_resource type="Script" uid="uid://c0lkq2gtxm1s2" path="res://Scenes/CameraRig.cs" id="2_344ge"]
 [ext_resource type="PackedScene" uid="uid://fw7lwkluyu6j" path="res://Scenes/player_hand.tscn" id="2_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bcdej23j85bdf" path="res://Scenes/deck.tscn" id="3_jjvhh"]
+[ext_resource type="Script" uid="uid://ds7r3qw3vwh0o" path="res://Scripts/PlayerViewCamera.cs" id="3_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://b6ikmxc7ymyft" path="res://Scenes/card_factory.tscn" id="5_kry3j"]
 [ext_resource type="Script" uid="uid://dd88sebwots0r" path="res://Scripts/MouseoverManager.cs" id="6_21xkr"]
 
@@ -18,14 +20,6 @@ script = ExtResource("1_jjgbg")
 cardFactory = NodePath("Game Components/CardFactory")
 
 [node name="Room Elements" type="Node" parent="."]
-
-[node name="PlayerViewCamera" type="Camera3D" parent="Room Elements"]
-transform = Transform3D(1, -0.000616808, -0.000513924, 0.000801423, 0.728741, 0.684789, -4.7866e-05, -0.684789, 0.728741, 0, 1.29041, 1.56136)
-current = true
-fov = 45.0
-
-[node name="PlayerHand" parent="Room Elements/PlayerViewCamera" instance=ExtResource("2_jjvhh")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.1, -0.5)
 
 [node name="BoardIlluminationLight" type="DirectionalLight3D" parent="Room Elements"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341506, 0)
@@ -44,6 +38,23 @@ shape = SubResource("BoxShape3D_8gbba")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.00386941, 0)
 mesh = SubResource("BoxMesh_jjvhh")
 skeleton = NodePath("../../..")
+
+[node name="CameraRig" type="Node3D" parent="Room Elements" node_paths=PackedStringArray("camera")]
+transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, -0.025, 1, 1)
+script = ExtResource("2_344ge")
+camera = NodePath("PlayerViewCamera")
+CameraScrollSpeed = 12.0
+ZoomCloseLimit = 0.5
+ZoomFarLimit = 1.5
+
+[node name="PlayerViewCamera" type="Camera3D" parent="Room Elements/CameraRig"]
+transform = Transform3D(1, -0.000616808, -0.000513924, 0.00078589, 0.621161, 0.783683, -0.000164152, -0.783683, 0.621161, 0, 0, 0)
+current = true
+fov = 45.0
+script = ExtResource("3_ynf5e")
+
+[node name="PlayerHand" parent="Room Elements/CameraRig/PlayerViewCamera" instance=ExtResource("2_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.1, -0.5)
 
 [node name="Game Components" type="Node" parent="."]
 
