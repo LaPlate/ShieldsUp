@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dlg0v6o7wp277"]
+[gd_scene load_steps=32 format=3 uid="uid://dlg0v6o7wp277"]
 
 [ext_resource type="Texture2D" uid="uid://bmvbgy6ajoryu" path="res://Assets/Skins/Mat Components/Boxy Demo Spaceship.png" id="1_4sp0c"]
 [ext_resource type="Texture2D" uid="uid://fbx3g1faax41" path="res://Assets/Skins/Mat Components/Bridge Stations.png" id="2_mrw5t"]
@@ -15,23 +15,65 @@ albedo_texture = ExtResource("1_4sp0c")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntech"]
 albedo_texture = ExtResource("2_mrw5t")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_seiwk"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pvxii"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cus3j"]
 albedo_texture = ExtResource("3_ntech")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hy0fm"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stsji"]
 albedo_texture = ExtResource("4_oxv4i")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vgra"]
+size = Vector3(0.0979919, 0.0439453, 0.0664673)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nxwpm"]
+size = Vector3(0.102386, 0.0439453, 0.0710449)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_di3qp"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvxii"]
 albedo_texture = ExtResource("5_stsji")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p12rg"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vr6ii"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uwe6u"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hy0fm"]
 albedo_texture = ExtResource("6_seiwk")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_agb6q"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vgra"]
 albedo_texture = ExtResource("7_seiwk")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gi3mr"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_seiwk"]
 albedo_texture = ExtResource("5_lhp7q")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v66rk"]
+size = Vector3(0.107788, 0.0439453, 0.0710449)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mo8tl"]
+size = Vector3(0.10907, 0.0439453, 0.0654907)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jchh3"]
+size = Vector3(0.107788, 0.0439453, 0.0648804)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u5s86"]
 size = Vector3(1.8, 0.02, 1.25)
@@ -54,6 +96,18 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.001
 size = Vector3(0.329523, 0.00616211, 0.810156)
 material = SubResource("StandardMaterial3D_ntech")
 
+[node name="BridgeCaptainArea" type="Area3D" parent="RigidBody3D/MatBase/BridgeIndent/BridgePanel"]
+
+[node name="CollisionBridgeCaptainAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/BridgeIndent/BridgePanel/BridgeCaptainArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0833129, 0.0209961, -0.32312)
+shape = SubResource("BoxShape3D_seiwk")
+
+[node name="Bridge1stMateArea" type="Area3D" parent="RigidBody3D/MatBase/BridgeIndent/BridgePanel"]
+
+[node name="BridgeArea1stMateAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/BridgeIndent/BridgePanel/Bridge1stMateArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0596082, 0.0192115, -0.320439)
+shape = SubResource("BoxShape3D_pvxii")
+
 [node name="SensorsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.663, 0.006, -0.421)
 operation = 2
@@ -63,6 +117,12 @@ size = Vector3(0.341, 0.009, 0.327)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000787318, -0.00191894, -0.000735432)
 size = Vector3(0.33, 0.006, 0.35127)
 material = SubResource("StandardMaterial3D_cus3j")
+
+[node name="SensorsTechArea" type="Area3D" parent="RigidBody3D/MatBase/SensorsIndent/SensorsPanel"]
+
+[node name="SensorsTechAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/SensorsIndent/SensorsPanel/SensorsTechArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0207596, 0.0961055)
+shape = SubResource("BoxShape3D_hy0fm")
 
 [node name="WeaponsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.645375, 0.00657327, -0.329444)
@@ -74,6 +134,24 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.370
 size = Vector3(0.513428, 0.009, 0.338252)
 material = SubResource("StandardMaterial3D_stsji")
 
+[node name="WeaponsOfficerArea" type="Area3D" parent="RigidBody3D/MatBase/WeaponsIndent/WeaponsPanel"]
+
+[node name="WeaponsOfficerAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/WeaponsIndent/WeaponsPanel/WeaponsOfficerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154702, 0.0139785, -0.0968536)
+shape = SubResource("BoxShape3D_5vgra")
+
+[node name="WeaponsSecurityArea" type="Area3D" parent="RigidBody3D/MatBase/WeaponsIndent/WeaponsPanel"]
+
+[node name="WeaponsSecurityAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/WeaponsIndent/WeaponsPanel/WeaponsSecurityArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0252354, 0.0142894, -0.0962572)
+shape = SubResource("BoxShape3D_nxwpm")
+
+[node name="WeaponsTechArea" type="Area3D" parent="RigidBody3D/MatBase/WeaponsIndent/WeaponsPanel"]
+
+[node name="WeaponsTechAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/WeaponsIndent/WeaponsPanel/WeaponsTechArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112201, 0.0166911, -0.0996078)
+shape = SubResource("BoxShape3D_di3qp")
+
 [node name="EngineeringIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.645375, 0.00657327, 0.295651)
 operation = 2
@@ -83,6 +161,27 @@ size = Vector3(0.341142, 0.00884766, 0.586063)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -7.42078e-05)
 size = Vector3(0.57832, 0.009, 0.33)
 material = SubResource("StandardMaterial3D_pvxii")
+
+[node name="EngineeringTechArea1" type="Area3D" parent="RigidBody3D/MatBase/EngineeringIndent/EngineeringPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.190254, 0, -0.101231)
+
+[node name="EngineeringTechArea1Shape" type="CollisionShape3D" parent="RigidBody3D/MatBase/EngineeringIndent/EngineeringPanel/EngineeringTechArea1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0309228, 0.0158082, 0.00525123)
+shape = SubResource("BoxShape3D_p12rg")
+
+[node name="EngineeringTechArea2" type="Area3D" parent="RigidBody3D/MatBase/EngineeringIndent/EngineeringPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0955354)
+
+[node name="EngineeringTechArea2Shape" type="CollisionShape3D" parent="RigidBody3D/MatBase/EngineeringIndent/EngineeringPanel/EngineeringTechArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00672284, 0.0171158, 0.00486654)
+shape = SubResource("BoxShape3D_vr6ii")
+
+[node name="EngineeringTechArea3" type="Area3D" parent="RigidBody3D/MatBase/EngineeringIndent/EngineeringPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149046, 0, -0.0950126)
+
+[node name="EngineeringTechArea3Shape" type="CollisionShape3D" parent="RigidBody3D/MatBase/EngineeringIndent/EngineeringPanel/EngineeringTechArea3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00530469, 0.0171647, 0.000743628)
+shape = SubResource("BoxShape3D_uwe6u")
 
 [node name="ShieldsIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236893, 0.00657327, -0.0270551)
@@ -94,6 +193,12 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0020
 size = Vector3(0.33, 0.006, 0.35127)
 material = SubResource("StandardMaterial3D_hy0fm")
 
+[node name="ShieldsTechArea" type="Area3D" parent="RigidBody3D/MatBase/ShieldsIndent/ShieldsPanel"]
+
+[node name="ShieldsTechAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/ShieldsIndent/ShieldsPanel/ShieldsTechArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00233343, 0.0154205, 0.0977679)
+shape = SubResource("BoxShape3D_agb6q")
+
 [node name="CargoIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211107, 0.00657327, 0.381936)
 operation = 2
@@ -103,6 +208,13 @@ size = Vector3(1.23714, 0.00884766, 0.401795)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.000120968, -0.00189646, 0)
 size = Vector3(0.393904, 0.00616211, 1.23266)
 material = SubResource("StandardMaterial3D_5vgra")
+
+[node name="CargoPilotArea" type="Area3D" parent="RigidBody3D/MatBase/CargoIndent/CargoPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0866131, 0, 0.223735)
+
+[node name="CargoPilotAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/CargoIndent/CargoPanel/CargoPilotArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0118228, 0.018587, -0.000645223)
+shape = SubResource("BoxShape3D_gi3mr")
 
 [node name="SickBayIndent" type="CSGBox3D" parent="RigidBody3D/MatBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235182, 0.00657327, -0.0270551)
@@ -114,5 +226,24 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.
 size = Vector3(0.33, 0.006, 0.35127)
 material = SubResource("StandardMaterial3D_seiwk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="SickBayTechArea" type="Area3D" parent="RigidBody3D/MatBase/SickBayIndent/SickBayPanel"]
+
+[node name="SickBayTechAreaShape" type="CollisionShape3D" parent="RigidBody3D/MatBase/SickBayIndent/SickBayPanel/SickBayTechArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0792172, 0.018475, -0.0874218)
+shape = SubResource("BoxShape3D_v66rk")
+
+[node name="SickBayPatientArea1" type="Area3D" parent="RigidBody3D/MatBase/SickBayIndent/SickBayPanel"]
+
+[node name="SickBayPatientArea1Shape" type="CollisionShape3D" parent="RigidBody3D/MatBase/SickBayIndent/SickBayPanel/SickBayPatientArea1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0542623, 0.0171371, -0.0517056)
+shape = SubResource("BoxShape3D_mo8tl")
+
+[node name="SickBayPatientArea2" type="Area3D" parent="RigidBody3D/MatBase/SickBayIndent/SickBayPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0549095, 0, -0.118043)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/MatBase/SickBayIndent/SickBayPanel/SickBayPatientArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0180089, -0.00209734)
+shape = SubResource("BoxShape3D_jchh3")
+
+[node name="playmatCollision" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_u5s86")

@@ -32,13 +32,12 @@ public partial class MouseoverManager : Node3D
             if (parent != null && parent.IsInGroup("Player_Selectable_Cards") && parent is Card card)
             {
 
-                GD.Print("Parent is in the Group and is a Card.");
                 if (card != lastHighlightedCard)
                 {
-                    GD.Print(">>> HIGHLIGHT ATTEMPT on: ", card.Name);
+                    /*GD.Print(">>> HIGHLIGHT ATTEMPT on: ", card.Name);
                     GD.Print("    Path: ", card.GetPath());
                     GD.Print("    InsideTree: ", card.IsInsideTree());
-                    GD.Print("    InstanceId: ", card.GetInstanceId());
+                    GD.Print("    InstanceId: ", card.GetInstanceId());*/
                     lastHighlightedCard?.Highlight(false);
                     lastHighlightedCard = card;
                     lastHighlightedCard.Highlight(true);
@@ -49,10 +48,10 @@ public partial class MouseoverManager : Node3D
             }
             else if (lastHighlightedCard != null)
             {
-                GD.Print(">>> HIGHLIGHT ATTEMPT on: ", lastHighlightedCard.Name);
+                /*GD.Print(">>> HIGHLIGHT ATTEMPT on: ", lastHighlightedCard.Name);
                 GD.Print("    Path: ", lastHighlightedCard.GetPath());
                 GD.Print("    InsideTree: ", lastHighlightedCard.IsInsideTree());
-                GD.Print("    InstanceId: ", lastHighlightedCard.GetInstanceId());
+                GD.Print("    InstanceId: ", lastHighlightedCard.GetInstanceId());*/
                 lastHighlightedCard.Highlight(false);
                 lastHighlightedCard = null;
             }
@@ -60,10 +59,10 @@ public partial class MouseoverManager : Node3D
         }
         else if (lastHighlightedCard != null)
         {
-            GD.Print(">>> HIGHLIGHT ATTEMPT on: ", lastHighlightedCard.Name);
+            /*GD.Print(">>> HIGHLIGHT ATTEMPT on: ", lastHighlightedCard.Name);
             GD.Print("    Path: ", lastHighlightedCard.GetPath());
             GD.Print("    InsideTree: ", lastHighlightedCard.IsInsideTree());
-            GD.Print("    InstanceId: ", lastHighlightedCard.GetInstanceId());
+            GD.Print("    InstanceId: ", lastHighlightedCard.GetInstanceId());*/
             lastHighlightedCard.Highlight(false);
             lastHighlightedCard = null;
         }

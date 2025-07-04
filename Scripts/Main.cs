@@ -19,8 +19,9 @@ public partial class Main : Node3D
         GD.Print("demoCard is loaded as " + demoCard.cardData.CardTitle);
         AddChild(demoCard);
         demoCard.GlobalPosition = new Vector3(0.5f, 0.5f, 0.5f);
-        GD.Print(demoCard.GetNode<RigidBody3D>("CardBody").Name);
-        GD.Print(demoCard.GetNode<MeshInstance3D>("CardBody/CardMesh3D").Name);
+        var demoCardfreeze = demoCard.GetNode<RigidBody3D>("CardBody");
+        demoCardfreeze.Freeze = true;
+        demoCard.IsDraggable = true;
 
     }
 

@@ -1,19 +1,26 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgxfnkdxidyuh"]
+[gd_scene load_steps=14 format=3 uid="uid://cgxfnkdxidyuh"]
 
 [ext_resource type="Script" uid="uid://cddqykhen5qh" path="res://Scripts/Main.cs" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://dlg0v6o7wp277" path="res://Scenes/demo_ship.tscn" id="2_8gbba"]
-[ext_resource type="Script" uid="uid://c0lkq2gtxm1s2" path="res://Scenes/CameraRig.cs" id="2_344ge"]
+[ext_resource type="Script" uid="uid://c0lkq2gtxm1s2" path="res://Scripts/CameraRig.cs" id="2_344ge"]
 [ext_resource type="PackedScene" uid="uid://fw7lwkluyu6j" path="res://Scenes/player_hand.tscn" id="2_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://dg62syljmi2lg" path="res://Assets/Skins/Mat Components/Starfield.png" id="2_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://bcdej23j85bdf" path="res://Scenes/deck.tscn" id="3_jjvhh"]
 [ext_resource type="Script" uid="uid://ds7r3qw3vwh0o" path="res://Scripts/PlayerViewCamera.cs" id="3_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://b6ikmxc7ymyft" path="res://Scenes/card_factory.tscn" id="5_kry3j"]
 [ext_resource type="Script" uid="uid://dd88sebwots0r" path="res://Scripts/MouseoverManager.cs" id="6_21xkr"]
+[ext_resource type="Script" uid="uid://bm32hhunttt3e" path="res://Scripts/MouseClickManager.cs" id="10_hptm8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8gbba"]
-size = Vector3(2, 2, 0.01)
+size = Vector3(4, 4, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hptm8"]
+specular_mode = 2
+albedo_texture = ExtResource("2_ynf5e")
 
 [sub_resource type="BoxMesh" id="BoxMesh_jjvhh"]
-size = Vector3(2, 2, 0.01)
+material = SubResource("StandardMaterial3D_hptm8")
+size = Vector3(4, 4, 0.01)
 
 [node name="Main" type="Node3D" node_paths=PackedStringArray("cardFactory")]
 script = ExtResource("1_jjgbg")
@@ -22,7 +29,7 @@ cardFactory = NodePath("Game Components/CardFactory")
 [node name="Room Elements" type="Node" parent="."]
 
 [node name="BoardIlluminationLight" type="DirectionalLight3D" parent="Room Elements"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341506, 0)
+transform = Transform3D(1, 0, 0, 0, 0.990268, 0.139173, 0, -0.139173, 0.990268, 0.017, 1.178, 1.081)
 light_energy = 4.353
 light_indirect_energy = 1.914
 
@@ -70,3 +77,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.859583, 0.0295941, 0.88775
 
 [node name="MouseoverManager" type="Node3D" parent="UI Elements"]
 script = ExtResource("6_21xkr")
+
+[node name="MouseClickManager" type="Node3D" parent="UI Elements" node_paths=PackedStringArray("camera")]
+script = ExtResource("10_hptm8")
+camera = NodePath("../../Room Elements/CameraRig/PlayerViewCamera")
