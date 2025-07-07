@@ -12,7 +12,17 @@ public partial class CardDatabase : Resource
                 CardNum = 1,
                 CardTitle = "Basic Action",
                 CardType = CardData.cardType.Player,
-                cardLogic = new CardLogic()
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {InstructionName = "Choose Station to Power", Type = InstructionSet.InstructionType.Execute, Instruction = InstructionSet.InstructionAction.PlayerChoice, Resource = InstructionSet.InstructionActionResource.Station},
+                        new InstructionSet
+                        { InstructionName = "Send Energy to Selected Station (1)", Type = InstructionSet.InstructionType.Execute, Instruction = InstructionSet.InstructionAction.AddResource, Resource = InstructionSet.InstructionActionResource.Energy, Quantity = 1, TargetStation = InstructionSet.InstructionStationTarget.PlayerChosen, EndProcessingAfterThisInstruction = true }
+                        
+                    }
+                }
             }
         },
         { 2, new CardData
@@ -20,7 +30,20 @@ public partial class CardDatabase : Resource
                 CardNum = 2,
                 CardTitle = "Basic Action - Security",
                 CardType = CardData.cardType.Player,
-                cardLogic = new CardLogic()
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        { InstructionName = "Choose Station to Power", Type = InstructionSet.InstructionType.Execute, Instruction = InstructionSet.InstructionAction.PlayerChoice, Resource = InstructionSet.InstructionActionResource.Station, Quantity = 1 },
+                        new InstructionSet
+                        { InstructionName = "IF: Player selected Weapons/Security", Type = InstructionSet.InstructionType.Conditional, Instruction = InstructionSet.InstructionAction.PlayerChoice, TargetStation = InstructionSet.InstructionStationTarget.Security },
+                        new InstructionSet
+                        { InstructionName = "Extra Power to Security", Type = InstructionSet.InstructionType.Execute, Instruction = InstructionSet.InstructionAction.AddResource, Resource = InstructionSet.InstructionActionResource.Energy, TargetStation = InstructionSet.InstructionStationTarget.Security, Quantity = 2, EndProcessingAfterThisInstruction = true },
+                        new InstructionSet
+                        { InstructionName = "ELSE: Send Energy to Selected Station (1)", Type = InstructionSet.InstructionType.Execute, Instruction = InstructionSet.InstructionAction.AddResource, Resource = InstructionSet.InstructionActionResource.Energy, Quantity = 1, TargetStation = InstructionSet.InstructionStationTarget.PlayerChosen, EndProcessingAfterThisInstruction = true}                    
+                    }
+                }
             }
         },
         { 3, new CardData
