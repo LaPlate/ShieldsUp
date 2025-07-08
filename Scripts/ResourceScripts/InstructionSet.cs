@@ -7,16 +7,17 @@ public partial class InstructionSet : Node
     public string InstructionName { get; set; }
 
     public enum InstructionType { Execute, Conditional }
-    public enum InstructionAction { Draw, Exile, Discard, AddResource, ReduceResource, ReplaceStation, PromoteCard, PlayerChoice, ExoticAction }
+    public enum InstructionAction { Draw, Exile, Discard, AddResource, ReplaceStation, PromoteCard, PlayerChoice, JumpToStep, ExoticAction }
     public enum InstructionActionResource
     {
-        CardInHand, CardInDeck, CardinDiscard, CardinExile, CardsDrawnPerTurn, CardatStation,
+        CardInHand, CardInDeck, CardinDiscard, CardinExile, CardsDrawnPerTurn, CardAtStation,
         Energy, WeaponPower, ShieldPower, Armor, EnginePower, SecurityPower, ScannerPower, SickBayPower,
         Hazard, Enemy, Cargo, Station
     }
-    public enum InstructionStationTarget { Bridge, Weapons, Security, Engineering, Cargo, SickBay, Shields, Sensors, PlayerChosen }
+    public enum InstructionStationTarget { Bridge, Weapons, Security, Engineering, Cargo, SickBay, Shields, Sensors, PlayerChosen, Random }
 
     public int Quantity { get; set; }
+    public List<string> ChoiceOptions { get; set; }
     public List<int> TargetEntityIDList { get; set; }
     public bool EndProcessingAfterThisInstruction;
 
