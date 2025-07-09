@@ -6,25 +6,39 @@ public partial class InstructionSet : Node
 {
     public string InstructionName { get; set; }
 
-    public enum InstructionType { Execute, Conditional }
-    public enum InstructionAction { Draw, Exile, Discard, AddResource, ReplaceStation, PromoteCard, PlayerChoice, JumpToStep, ExoticAction }
-    public enum InstructionActionResource
+    public enum InstructionType { Execute, Conditional, JumpToStep }
+    public enum InstructionAction
     {
-        CardInHand, CardInDeck, CardinDiscard, CardinExile, CardsDrawnPerTurn, CardAtStation,
-        Energy, WeaponPower, ShieldPower, Armor, EnginePower, SecurityPower, ScannerPower, SickBayPower,
-        Hazard, Enemy, Cargo, Station
+        DrawCards, ExileCards, DiscardCards, PickCards, RevealCards, AddCards,
+        AddResource, MultiplyResource, AddCargo, AddStationAbility, SuppressStationAbility, AddDamage,
+        CreateAwayMission, JumpToStep, ExoticAction, AddXP, PlayerChoice,
+        AttackPLayer
     }
-    public enum InstructionStationTarget { Bridge, Weapons, Security, Engineering, Cargo, SickBay, Shields, Sensors, PlayerChosen, Random }
+    public enum InstructionFrom
+    { Hand, PlayerDeck, PlayerDiscard, EventDeck, ThreatDeck, CardAtStation, Station, }
 
+    public enum GameObject
+    {
+        Energy, WeaponPower, ShieldPower, Armor, EnginePower, SecurityPower, SensorPower, SickBayPower,
+        Hazard, Enemy, RawOre, TradeGoods, PreciousMinerals, Station
+    }
+    public enum Station { Bridge, Weapons, Security, Engineering, Cargo, SickBay, Shields, Sensors, PlayerChosen, Random, All }
+
+    public enum InstructionTo
+    {
+        Station, Hand, PlayerDeck, PlayerDiscard, EventDeck, ThreatDeck, CardAtStation
+    }
+
+    public InstructionType InstructionLineType { get; set; }
     public int Quantity { get; set; }
     public List<string> ChoiceOptions { get; set; }
-    public List<int> TargetEntityIDList { get; set; }
+    public List<int> IDs { get; set; }
     public bool EndProcessingAfterThisInstruction;
-
     public InstructionAction Instruction { get; set; }
-    public InstructionActionResource Resource { get; set; }
-
+    public InstructionFrom From { get; set; }
+    public InstructionTo To { get; set; }
+    public List<GameObject> Stuff { get; set; }
     public InstructionType Type { get; set; }
-    
-    public InstructionStationTarget TargetStation { get; set; }
+    public List<Station> FromStation { get; set; }
+    public List<Station> ToStation { get; set; }
 }
