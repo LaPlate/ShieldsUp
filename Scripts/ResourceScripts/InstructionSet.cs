@@ -9,24 +9,24 @@ public partial class InstructionSet : Node
     public enum InstructionType { Execute, Conditional, JumpToStep }
     public enum InstructionAction
     {
-        DrawCards, ExileCards, DiscardCards, PickCards, RevealCards, AddCards,
+        DrawCards, ExileCards, DiscardCards, PickCards, RevealCards, RevealCardsUntil, AddCards,
         AddResource, MultiplyResource, AddCargo, AddStationAbility, SuppressStationAbility, AddDamage,
         CreateAwayMission, JumpToStep, ExoticAction, AddXP, PlayerChoice,
-        AttackPLayer
+        AttackPLayer, RemoveThreat, DamageThreat, RemoveBoarders, RemoveTorpedoes
     }
     public enum InstructionFrom
-    { Hand, PlayerDeck, PlayerDiscard, EventDeck, ThreatDeck, CardAtStation, Station, }
+    { Hand, PlayerDeck, PlayerDiscard, EventDeck, ThreatDeck, CardAtStation, Station, ActiveThreats, AvailableChoices, Revealed, RandomCrew }
 
     public enum GameObject
     {
-        Energy, WeaponPower, ShieldPower, Armor, EnginePower, SecurityPower, SensorPower, SickBayPower,
+        Energy, WeaponPower, ShieldPower, Armor, EnginePower, SecurityPower, SensorPower, SickBayPower, CargoPower, PowerPlantPower,
         Hazard, Enemy, RawOre, TradeGoods, PreciousMinerals, Station
     }
     public enum Station { Bridge, Weapons, Security, Engineering, Cargo, SickBay, Shields, Sensors, PlayerChosen, Random, All }
 
     public enum InstructionTo
     {
-        Station, Hand, PlayerDeck, PlayerDiscard, EventDeck, ThreatDeck, CardAtStation
+        Station, Hand, PlayerDeck, PlayerDiscard, EventDeck, ThreatDeck, CardAtStation, AvailableChoices, PlayerChoices
     }
 
     public InstructionType InstructionLineType { get; set; }

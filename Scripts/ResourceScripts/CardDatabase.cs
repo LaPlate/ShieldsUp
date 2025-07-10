@@ -469,7 +469,7 @@ public partial class CardDatabase : Resource
                         {
                             InstructionName = "Suppress Incoming Fire",
                             InstructionLineType = InstructionSet.InstructionType.Execute,
-                            Instruction = InstructionSet.InstructionAction.ExoticAction // EXOTIC ACTION
+                            Instruction = InstructionSet.InstructionAction.ExoticAction // EXOTIC ACTION: Suppress enemy attack effects
                         }
                     }
                 }
@@ -765,6 +765,511 @@ public partial class CardDatabase : Resource
                     }
                 }
             }
+        },
+        {
+            24, new CardData
+            {
+                CardNum = 24,
+                CardTitle = "Trading Vessel",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Spend a Trade Good",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCargo,
+                            Quantity = -1, Stuff = { InstructionSet.GameObject.TradeGoods }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Gain a Precious Minerals",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCargo,
+                            Quantity = 1, Stuff = { InstructionSet.GameObject.PreciousMinerals }
+                        }
+                    }
+                }
+            }
+        },
+        { 25, new CardData
+            {
+                CardNum = 25,
+                CardTitle = "Hide in Debris",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Test for Distance",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.ExoticAction, // EXOTIC ACTION: Test Enemy Distances
+                            From = InstructionSet.InstructionFrom.ActiveThreats,
+                            To = InstructionSet.InstructionTo.AvailableChoices
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Choose a Threat to Hide From",
+                            InstructionLineType = InstructionSet.InstructionType.Conditional,
+                            Instruction = InstructionSet.InstructionAction.PlayerChoice,
+                            From = InstructionSet.InstructionFrom.AvailableChoices,
+                            To = InstructionSet.InstructionTo.PlayerChoices,
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Remove the Threat",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.RemoveThreat
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Suppress Engines and Weapons",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.SuppressStationAbility,
+                            ToStation = { InstructionSet.Station.Weapons, InstructionSet.Station.Engineering }
+                        }
+                    }
+                }
+            }
+        },
+        { 26, new CardData
+            {
+                CardNum = 26,
+                CardTitle = "Damage Control",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Spend the Energy",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = -2, Stuff = { InstructionSet.GameObject.Energy }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Choose the Station to Repair",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddDamage,
+                            Quantity = -2, ToStation = { InstructionSet.Station.PlayerChosen }
+                        }
+                    }
+                }
+            }
+        },
+        { 27, new CardData
+            {
+                CardNum = 27,
+                CardTitle = "Derelict Spacecraft",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Pay for the Cargo - 1st Time",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = -2, Stuff = { InstructionSet.GameObject.Energy }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Add 1 Cargo - 1st Time",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCargo,
+                            Quantity = 1, Stuff = { InstructionSet.GameObject.TradeGoods }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Query to Repeat",
+                            InstructionLineType = InstructionSet.InstructionType.Conditional,
+                            Instruction = InstructionSet.InstructionAction.PlayerChoice,
+                            ChoiceOptions = { "Yes - Spend another 2 Energy", "No" },
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Jump past Terminus",
+                            InstructionLineType = InstructionSet.InstructionType.JumpToStep,
+                            Quantity = 5
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Terminus",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            EndProcessingAfterThisInstruction = true
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Pay for the Cargo - 2nd Time",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = -2, Stuff = { InstructionSet.GameObject.Energy }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Add 1 Cargo - 2nd Time",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCargo,
+                            Quantity = 1, Stuff = { InstructionSet.GameObject.TradeGoods }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Query to Repeat",
+                            InstructionLineType = InstructionSet.InstructionType.Conditional,
+                            Instruction = InstructionSet.InstructionAction.PlayerChoice,
+                            ChoiceOptions = { "Yes - Spend another 2 Energy", "No" },
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Jump past Terminus",
+                            InstructionLineType = InstructionSet.InstructionType.JumpToStep,
+                            Quantity = 10
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Terminus",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            EndProcessingAfterThisInstruction = true
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Pay for the Cargo - 3rd Time",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = -2, Stuff = { InstructionSet.GameObject.Energy }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Add 1 Cargo - 3rd Time",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCargo,
+                            Quantity = 1, Stuff = { InstructionSet.GameObject.TradeGoods }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            28, new CardData
+            {
+                CardNum = 28,
+                CardTitle = "Sensik Premonition",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Reveal the next Event",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.RevealCards,
+                            Quantity = 1, From = InstructionSet.InstructionFrom.EventDeck
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Query: top of deck or 10 deep",
+                            InstructionLineType = InstructionSet.InstructionType.Conditional,
+                            Instruction = InstructionSet.InstructionAction.PlayerChoice,
+                            ChoiceOptions = {" Put back on Top", "Place 10 Cards in" }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "If True, Do nothing",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            EndProcessingAfterThisInstruction = true
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Put Card 10 Cards in",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.ExoticAction, //EXOTIC ACTION: Put top card 10 cards in
+                            To = InstructionSet.InstructionTo.EventDeck
+                        }
+                    }
+                }
+            }
+        },
+        { 29, new CardData
+            {
+                CardNum = 29,
+                CardTitle = "Sensik Foreboding",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Sensik Foreboding",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.RevealCardsUntil,
+                            From = InstructionSet.InstructionFrom.ThreatDeck,
+                            Stuff = { InstructionSet.GameObject.Enemy }
+                        }
+                    }
+                }
+            }
+        },
+        { 30, new CardData
+            {
+                CardNum = 30,
+                CardTitle = "Sensik Foretelling",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Reveal the top card of the Player deck.",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.RevealCards,
+                            Quantity = 1, From = InstructionSet.InstructionFrom.PlayerDeck
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "IF: Player Chooses to put it in hand",
+                            InstructionLineType = InstructionSet.InstructionType.Conditional,
+                            ChoiceOptions = { "Add to Hand", "Bottom of Deck" },
+                            Instruction = InstructionSet.InstructionAction.PlayerChoice
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "THEN: Draw the card",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.DrawCards,
+                            Quantity = 1, From = InstructionSet.InstructionFrom.PlayerDeck, To = InstructionSet.InstructionTo.Hand,
+                            EndProcessingAfterThisInstruction = true
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "ELSE: Put the card on the bottom of the deck",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.ExoticAction, //EXOTIC ACTION Put card on bottom of deck (c'mon...)
+                            From = InstructionSet.InstructionFrom.PlayerDeck, To = InstructionSet.InstructionTo.PlayerDeck,
+                            Quantity = 1
+                        }
+                    }
+                }
+            }
+
+        },
+        { 31, new CardData
+
+            {
+                CardNum = 31,
+                CardTitle = "Encountered Conflict",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Player decides what to do",
+                            InstructionLineType = InstructionSet.InstructionType.Conditional,
+                            ChoiceOptions = { "Do nothing", "Intervene ( Reveal an enemy vessel)" },
+                            Instruction = InstructionSet.InstructionAction.PlayerChoice
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Terminus",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            EndProcessingAfterThisInstruction = true
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "ELSE: Reveal Threats until Enemy Vessel is found",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.RevealCardsUntil,
+                            Stuff = { InstructionSet.GameObject.Enemy }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Put Threat into Play",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.DrawCards,
+                            Quantity = 1, From = InstructionSet.InstructionFrom.Revealed
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Give player choice of Trade Goods or Minerals",
+                            InstructionLineType = InstructionSet.InstructionType.Conditional,
+                            Instruction = InstructionSet.InstructionAction.PlayerChoice,
+                            ChoiceOptions = { "2 Trade Goods", "1 Precious Minerals" }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Give player 2 Trade Goods and Terminate",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCargo,
+                            Stuff = { InstructionSet.GameObject.TradeGoods }, Quantity = 2,
+                            EndProcessingAfterThisInstruction = true
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "ELSE: Give the player 1 Precious Minerals",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCargo,
+                            Stuff = { InstructionSet.GameObject.PreciousMinerals }, Quantity = 1
+                        }
+                    }
+                }
+            }
+        },
+        { 32, new CardData
+            {
+                CardNum = 32,
+                CardTitle = "In Need of Rescue",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Player decides whether to intervene",
+                            InstructionLineType = InstructionSet.InstructionType.Conditional,
+                            ChoiceOptions = { "Do nothing", "Mount a Rescue! (3 Security, 1 cargo)" },
+                            Instruction = InstructionSet.InstructionAction.PlayerChoice
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "IF: Player does nothing",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            EndProcessingAfterThisInstruction = true
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "ELSE: Spend three Security power",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Stuff = { InstructionSet.GameObject.SecurityPower }, Quantity = -3
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Take the cargo",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCargo,
+                            Quantity = -1
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Gain a random Crewmember",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddCards,
+                            Quantity = 1,
+                            From = InstructionSet.InstructionFrom.RandomCrew,
+                            To = InstructionSet.InstructionTo.Hand
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Everyone gets 10XP",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddXP,
+                            Quantity = 10, To = InstructionSet.InstructionTo.CardAtStation,
+                            ToStation = { InstructionSet.Station.All }
+                        }
+
+                    }
+                }
+            }
+        },
+        { 33, new CardData
+            {
+                CardNum = 33,
+                CardTitle = "Security Simulations",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Add two Security Power",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = 2, Stuff = { InstructionSet.GameObject.SecurityPower }
+                        }
+                    }
+                }
+            }
+        },
+        { 34, new CardData
+            {
+                CardNum = 34,
+                CardTitle = "Close Combat Drills",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Add two Cargo Power",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = 2, Stuff = { InstructionSet.GameObject.CargoPower }
+                        },
+                        new InstructionSet
+                        {
+                            InstructionName = "Add one Weapons Power",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = 1, Stuff = { InstructionSet.GameObject.WeaponPower }
+                        }
+                    }
+                }
+            }
+        },
+        { 35, new CardData
+            {
+                CardNum = 35,
+                CardTitle = "Improved Propulsion Techniques",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Add two Engineering Power",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = 2, Stuff = { InstructionSet.GameObject.EnginePower }
+                        }
+                    }
+                }
+            }
+        },
+        { 36, new CardData
+            {
+                CardNum = 36,
+                CardTitle = "Redline the Power Plant",
+                CardType = CardData.cardType.Player,
+                cardLogic = new CardLogic
+                {
+                    Instructions = new List<InstructionSet>
+                    {
+                        new InstructionSet
+                        {
+                            InstructionName = "Add One PowerPlant Power",
+                            InstructionLineType = InstructionSet.InstructionType.Execute,
+                            Instruction = InstructionSet.InstructionAction.AddResource,
+                            Quantity = 1, Stuff = { InstructionSet.GameObject.PowerPlantPower }
+                        }
+                    }
+                }
+            }
         }
+
     };
 }
